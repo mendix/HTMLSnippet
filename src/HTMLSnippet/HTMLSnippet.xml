@@ -17,13 +17,12 @@
                 <enumerationValue key="js">JavaScript</enumerationValue>
             </enumerationValues>
         </property>
-
         <property key="contents" type="translatableString" multiline="true">
             <caption>Contents</caption>
             <category>Behavior</category>
             <description>The HTML or Javascript to embed.</description>
         </property>
-        <property key="documentation" type="string" multiline="true" required="true">
+        <property key="documentation" type="string" multiline="true" required="false">
             <caption>Documentation</caption>
             <category>Common</category>
             <description>Documentation of this widget. Should explain its purpose.</description>
