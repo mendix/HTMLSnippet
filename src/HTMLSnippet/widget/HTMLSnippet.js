@@ -3,8 +3,8 @@
 
 require([
 	'dojo/_base/declare', 'mxui/widget/_WidgetBase',
-	'mxui/dom', 'dojo/dom-style', 'dojo/dom-attr', 'dojo/html'
-], function (declare, _WidgetBase, dom, domStyle, domAttr, html) {
+	'mxui/dom', 'dojo/dom-style', 'dojo/dom-attr', 'dojo/dom-construct', 'dijit/layout/LinkPane'
+], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, linkPane) {
 	
 	'use strict';
 
@@ -18,23 +18,57 @@ require([
 		postCreate: function () {
 			console.log(this.id + '.postCreate');
 
-			switch (this.contenttype) {
+            var external = this.contentsPath != '' ? true : false;
+            
+            switch (this.contenttype) {
 				case 'html':
-					domStyle.set(this.domNode, {
-						'height': 'auto',
-						'width': '100%',
-						'outline': 0
-					});
 
-					domAttr.set(this.domNode, 'style', this.style); //might override height and width
-					html.set(this.domNode, this.contents);
+                    if (external)
+                    {
+                        new linkPane(
+                        {
+                            preload: true,
+                            loadingMessage: "",
+                            href: this.contentsPath,
+                            onDownloadError: function(){ console.log("Error loading html path");}
+                        }).placeAt(this.domNode.id).startup();
+                    }
+                    else
+                    {
+                        domStyle.set(this.domNode, {
+                            'height': 'auto',
+                            'width': '100%',
+                            'outline': 0
+                        });
+
+                        domAttr.set(this.domNode, 'style', this.style); // might override height and width
+                        domConstruct.place(this.contents, this.domNode, "only"); 
+                    }
+                    
 					break;
 				case 'js':
-					try {
-						eval(this.contents);
-					} catch (e) {
-						html.set(this.domNode, "Error while evaluating JavaScript: " + e);
-					}
+                
+                    if (external)
+                    {
+                        console.log("external js");
+                        
+                        var scriptNode = document.createElement("script"),
+                            intDate = +new Date();
+                        
+                        scriptNode.type = "text/javascript";    
+                        scriptNode.src = this.contentsPath + "?v=" + intDate.toString();
+                        
+                        domConstruct.place(scriptNode, this.domNode, "only");
+                    }
+                    else
+                    {
+                        console.log("inline js");
+                        try {
+                            eval(this.contents);
+                        } catch (e) {
+                            domConstruct.place("Error while evaluating JavaScript: " + e, this.domNode, "only");
+                        }
+                    }
 					break;
 			}
 		}
