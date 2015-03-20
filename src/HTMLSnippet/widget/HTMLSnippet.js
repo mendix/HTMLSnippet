@@ -50,8 +50,6 @@ require([
                 
                     if (external)
                     {
-                        console.log("external js");
-                        
                         var scriptNode = document.createElement("script"),
                             intDate = +new Date();
                         
@@ -62,7 +60,6 @@ require([
                     }
                     else
                     {
-                        console.log("inline js");
                         try {
                             eval(this.contents);
                         } catch (e) {
