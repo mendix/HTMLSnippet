@@ -61,7 +61,7 @@ require([
                     else
                     {
                         try {
-                            eval(this.contents);
+                            eval(this.contents + "\r\n//# sourceURL="+this.id+".js");
                         } catch (e) {
                             domConstruct.place("Error while evaluating JavaScript: " + e, this.domNode, "only");
                         }
