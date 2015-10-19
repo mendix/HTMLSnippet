@@ -18,7 +18,7 @@ require([
 		postCreate: function () {
 			console.log(this.id + '.postCreate');
 
-            var external = this.contentsPath != '' ? true : false;
+            var external = this.contentsPath !== '' ? true : false;
             
             switch (this.contenttype) {
 				case 'html':
