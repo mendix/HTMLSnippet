@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Regions
+
+   Used for navigation layouts
+========================================================================== */
+.region-topbar {
+	  border-bottom-color: $color-primary;
+	  min-height: 60px;
+	> .mx-layoutcontainer-wrapper {
+		.mx-navbar ul.nav > li.mx-navbar-item > a {
+			color: $color-text-white;
+		}
+		.navbar-brand img {
+			height: 26px;
+			margin-top: -5px;
+			margin-right: 5px;
+		}
+		.mx-navbar ul.nav > li.mx-navbar-item > a {
+			padding: 20px;
+		}
+	}
+	.toggle-btn {
+		color: $color-text-white;
+		border-color: #FFF;
+		font-size: 14px;
+		margin: 11px 10px 0 0;
+	}
+	.navbar-right {
+		.mx-appswitcher-button-placeholder,
+		.mx-profilemenu-button-placeholder {
+			border: 0;
+		}
+		.mx-profilemenu-button-placeholder {
+			iframe {
+				width: 38px !important;
+				height: 38px !important;
+			}
+		}
+	}
+}
+.region-sidebar {
+	
+	> .mx-layoutcontainer-wrapper {
+		
+	}
+}
+.region-content {
+	> .mx-layoutcontainer-wrapper {
+
+	}
+}
+
+
+/* ==========================================================================
+   Navbar Brand
+
+   Used to style your app brand and logo
+========================================================================== */
+.navbar-brand {
+  	min-height: $minimalheight-topbar;
+	padding: 21px 5px;
+	img {
+
+	}
+	a {
+		color: $color-text-white;
+		font-size: 18px;
+	}
+}
