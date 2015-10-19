@@ -1,5 +1,5 @@
 /*jslint white: true, nomen: true, plusplus: true */
-/*global mx, mxui, mendix, dojo, require, console, define, module */
+/*global mx, mxui, mendix, dojo, require, console, define, module, document*/
 
 require([
 	'dojo/_base/declare', 'mxui/widget/_WidgetBase',
@@ -63,7 +63,7 @@ require([
                         try {
                             eval(this.contents + "\r\n//# sourceURL="+this.id+".js");
                         } catch (e) {
-                            domConstruct.place("Error while evaluating JavaScript: " + e, this.domNode, "only");
+							domConstruct.place("<div class=\"alert alert-danger\">Error while evaluating javascript input: " + e + "</div>", this.domNode, "only");
                         }
                     }
 					break;
