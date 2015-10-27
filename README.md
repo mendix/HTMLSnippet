@@ -21,9 +21,9 @@ For more information on contributing to this repository visit [Contributing to a
  
 ## Properties
  
-* Content Type [ HTML, JavaScript ] : 
-  Defines whether this widget provides a piece of HTML or a piece of JavaScript.
+* Content Type [ HTML, JavaScript, JavaScript with jQuery ] : 
+Select how the snippet should be rendered. The JavaScript with jQuery option will make sure that jQuery 1.11.3 is loaded and should be available on window.jQuery for the snippet.
 * Contents : 
-  The HTML or Javascript to embed.
+The HTML or Javascript to embed.
 * Documentation : 
-  Documentation of this widget. Should explain its purpose.
+Documentation of this widget. Should explain its purpose.
