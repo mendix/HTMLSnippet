@@ -17,6 +17,7 @@
             <enumerationValues>
                 <enumerationValue key="html">HTML</enumerationValue>
                 <enumerationValue key="js">JavaScript</enumerationValue>
+				<enumerationValue key="jsjQuery">JavaScript with jQuery</enumerationValue>
             </enumerationValues>
         </property>
         

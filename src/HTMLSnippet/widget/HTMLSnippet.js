@@ -3,28 +3,18 @@
 
 require([
 	'dojo/_base/declare', 'mxui/widget/_WidgetBase',
-	'mxui/dom', 'dojo/dom-style', 'dojo/dom-attr', 'dojo/dom-construct', 'dijit/layout/LinkPane'
-], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, linkPane) {
-	
+	'mxui/dom', 'dojo/dom-style', 'dojo/dom-attr', 'dojo/dom-construct', 'dojo/_base/lang', 'dijit/layout/LinkPane'
+], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, linkPane) {
 	'use strict';
 
-	// Declare widget.
 	return declare('HTMLSnippet.widget.HTMLSnippet', [_WidgetBase], {
-
-		constructor: function () {
-		},
-		
-		// dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
 		postCreate: function () {
-			console.log(this.id + '.postCreate');
-
             var external = this.contentsPath !== '' ? true : false;
             
             switch (this.contenttype) {
 				case 'html':
 
-                    if (external)
-                    {
+                    if (external) {
                         new linkPane(
                         {
                             preload: true,
@@ -33,8 +23,7 @@ require([
                             onDownloadError: function(){ console.log("Error loading html path");}
                         }).placeAt(this.domNode.id).startup();
                     }
-                    else
-                    {
+                    else {
                         domStyle.set(this.domNode, {
                             'height': 'auto',
                             'width': '100%',
@@ -47,9 +36,9 @@ require([
                     
 					break;
 				case 'js':
+				case 'jsjQuery':
                 
-                    if (external)
-                    {
+                    if (external) {
                         var scriptNode = document.createElement("script"),
                             intDate = +new Date();
                         
@@ -58,15 +47,22 @@ require([
                         
                         domConstruct.place(scriptNode, this.domNode, "only");
                     }
-                    else
-                    {
-                        try {
-                            eval(this.contents + "\r\n//# sourceURL="+this.id+".js");
-                        } catch (e) {
-							domConstruct.place("<div class=\"alert alert-danger\">Error while evaluating javascript input: " + e + "</div>", this.domNode, "only");
-                        }
+                    else {
+						if (this.contenttype == 'jsjQuery') {
+							require(["HTMLSnippet/lib/jquery-1.11.3"], lang.hitch(this, this.evalJs));
+						} else {
+							this.evalJs();
+						}
                     }
 					break;
+			}
+		},
+		
+		evalJs: function () {
+			try {
+				eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
+			} catch (e) {
+				domConstruct.place("<div class=\"alert alert-danger\">Error while evaluating javascript input: " + e + "</div>", this.domNode, "only");
 			}
 		}
 	});
