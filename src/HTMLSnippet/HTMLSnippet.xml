@@ -34,6 +34,14 @@
             <category>Behavior</category>
             <description>The path to the HTML or Javascript you want to add. The root folder is theme folder. Will override the Contents if used.</description>
         </property>
+
+        <!-- The onclick microflow -->
+        <property key="onclickmf" type="microflow" required="false">
+            <caption> On click microflow </caption>
+            <category>Behavior</category>
+            <description>The microflow to execute on click</description>
+            <returnType type="Void"/>
+        </property>
         
         <!-- description of what the html/js should do -->
         <property key="documentation" type="string" multiline="true" required="false">

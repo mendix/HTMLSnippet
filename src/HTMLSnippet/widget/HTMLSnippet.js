@@ -10,6 +10,8 @@ require([
 	return declare('HTMLSnippet.widget.HTMLSnippet', [_WidgetBase], {
 		postCreate: function () {
             var external = this.contentsPath !== '' ? true : false;
+
+            this._setupEvents();
             
             switch (this.contenttype) {
 				case 'html':
@@ -57,6 +59,32 @@ require([
 					break;
 			}
 		},
+
+        _setupEvents: function () {
+            if (this.onclickmf) {
+                this.connect(this.domNode, "click", this._executeMicroflow)};
+            },
+
+        _executeMicroflow: function () {
+            if (this.onclickmf) {
+                mx.data.action({
+                    store: {
+                       caller: this.mxform
+                    },
+                    params: {
+                        actionname: this.onclickmf
+                    },
+                    callback: function () {
+                        // ok
+                    },
+                    error: function () {
+                        // error
+                    }
+
+                });
+            }
+        },
+
 		
 		evalJs: function () {
 			try {

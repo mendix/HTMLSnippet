@@ -15,6 +15,7 @@ For more information on contributing to this repository visit [Contributing to a
 
  * Embed raw HTML
  * Embed raw JavaScript
+ * Load external HTML / JS file
 
 ## Dependencies
 * Mendix 5.x environment
@@ -25,5 +26,9 @@ For more information on contributing to this repository visit [Contributing to a
 Select how the snippet should be rendered. The JavaScript with jQuery option will make sure that jQuery 1.11.3 is loaded and should be available on window.jQuery for the snippet.
 * Contents : 
 The HTML or Javascript to embed.
+* External File :
+The path to the HTML or JavaScript file you want to add. The root is the theme folder. Will override the Contents section if used.
+* On click microflow :
+The microflow which should be executed on click. This can be used to, for example, show a page when the snippet is being clicked.
 * Documentation : 
 Documentation of this widget. Should explain its purpose.
