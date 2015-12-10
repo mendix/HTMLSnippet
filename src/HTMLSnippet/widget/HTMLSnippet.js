@@ -62,10 +62,10 @@ require([
 
         _setupEvents: function () {
             if (this.onclickmf) {
-                this.connect(this.domNode, "click", this.execmf)};
+                this.connect(this.domNode, "click", this._executeMicroflow)};
             },
 
-        execmf: function () {
+        _executeMicroflow: function () {
             if (this.onclickmf) {
                 mx.data.action({
                     store: {
