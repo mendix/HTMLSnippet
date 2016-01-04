@@ -37,8 +37,10 @@ require([
               "width": "100%",
               "outline": 0
             });
+
             domAttr.set(this.domNode, "style", this.style); // might override height and width
-            domConstruct.place(this.contents, this.domNode, "only");
+            var n = domConstruct.create("div", { innerHTML: this.contents });
+            domConstruct.place(n, this.domNode, "only"); 
           }
           break;
 
