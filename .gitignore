@@ -1,6 +1,7 @@
 test/javasource/**/proxies/
 test/javasource/com/
 test/javasource/system/
+test/javasource/*
 test/deployment/
 test/.classpath
 test/.project
