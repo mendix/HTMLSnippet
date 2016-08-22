@@ -11,7 +11,7 @@ require([
 	"dojo/dom-construct",
 	"dojo/_base/lang",
 	"dijit/layout/LinkPane"
-], function(declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, linkPane) {
+], function(declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, LinkPane) {
 	"use strict";
 
 	return declare("HTMLSnippet.widget.HTMLSnippet", [_WidgetBase], {
@@ -29,7 +29,7 @@ require([
 			switch (this.contenttype) {
 				case "html":
 					if (external) {
-						new linkPane({
+						new LinkPane({
 							preload: true,
 							loadingMessage: "",
 							href: this.contentsPath,
@@ -61,7 +61,7 @@ require([
 
 						domConstruct.place(scriptNode, this.domNode, "only");
 					} else {
-						if (this.contenttype == "jsjQuery") {
+						if (this.contenttype === "jsjQuery") {
 							require(["HTMLSnippet/lib/jquery-1.11.3"], lang.hitch(this, this.evalJs));
 						} else {
 							this.evalJs();

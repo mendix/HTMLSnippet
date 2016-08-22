@@ -11,6 +11,7 @@
         "mendix" : false,
         "mx"     : false
     },
+    "evil"     : true,
 
     // Relaxing
     "laxbreak" : true,
