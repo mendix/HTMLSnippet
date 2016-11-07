@@ -1,7 +1,7 @@
 /*jslint white: true, nomen: true, plusplus: true */
 /*global mx, mxui, mendix, dojo, require, console, define, module, document*/
 
-require([
+define([
 	"dojo/_base/declare",
 	"mxui/widget/_WidgetBase",
 
@@ -112,4 +112,8 @@ require([
 		}
 
 	});
+});
+
+require(["HTMLSnippet/widget/HTMLSnippet"], function() {
+    "use strict";
 });
