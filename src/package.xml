@@ -3,6 +3,7 @@
     <clientModule name="HTMLSnippet" version="3.6.0" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
             <widgetFile path="HTMLSnippet/HTMLSnippet.xml"/>
+			<widgetFile path="HTMLSnippet/HTMLSnippetOffline.xml"/>
         </widgetFiles>
         <files>
             <file path="HTMLSnippet/widget/"/>
