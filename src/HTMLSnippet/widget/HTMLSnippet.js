@@ -16,6 +16,8 @@ require([
 
 	return declare("HTMLSnippet.widget.HTMLSnippet", [_WidgetBase], {
 
+		_objectChangeHandler : null,
+
 		postCreate: function() {
 			this._setupEvents();
 
@@ -74,7 +76,26 @@ require([
 		update: function(obj, callback) {
 			if (this.refreshOnContextChange) {
 				this.executeCode();
+
+				if(this.refreshOnContextUpdate){
+
+					if (this._objectChangeHandler !== null){
+						this.unsubscribe(this._objectChangeHandler);
+					}
+
+					if (obj){
+
+						this.subscribe({
+							guid: obj.getGuid(),
+							callback: lang.hitch(this, function(){
+								this.executeCode();
+							})
+						});
+					}
+				}
 			}
+
+
 			callback();
 		},
 
