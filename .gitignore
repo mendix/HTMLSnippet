@@ -10,7 +10,7 @@ test/.project
 *.tmp
 *.lock
 .idea/
-settings/
+
 dist/
 
 node_modules/
