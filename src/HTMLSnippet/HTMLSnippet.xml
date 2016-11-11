@@ -52,5 +52,12 @@
 			<category>Behavior</category>
 			<description>Refresh when the context changes</description>
 		</property>
+
+		<!-- Refresh when the context updates -->
+		<property key="refreshOnContextUpdate" type="boolean" defaultValue="false">
+			<caption>Refresh on context update</caption>
+			<category>Behavior</category>
+			<description>Refresh when the context updates (works only when context change is true)</description>
+		</property>
 	</properties>
 </widget>
