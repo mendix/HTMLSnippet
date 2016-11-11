@@ -1,7 +1,5 @@
-/*jslint white: true, nomen: true, plusplus: true */
-/*global mx, mxui, mendix, dojo, require, console, define, module, document*/
-
-require([
+/*jslint -W061:false*/
+define([
     "dojo/_base/declare",
     "mxui/widget/_WidgetBase",
 
@@ -66,7 +64,9 @@ require([
                         domConstruct.place(scriptNode, this.domNode, "only");
                     } else {
                         if (this.contenttype === "jsjQuery") {
-                            require(["HTMLSnippet/lib/jquery-1.11.3"], lang.hitch(this, this.evalJs));
+                            require([
+                                "HTMLSnippet/lib/jquery-1.11.3"
+                            ], lang.hitch(this, this.evalJs));
                         } else {
                             this.evalJs();
                         }
@@ -81,11 +81,10 @@ require([
 
                 if (this.refreshOnContextUpdate) {
                     if (this._objectChangeHandler !== null) {
-                        this.unsubscribe(this._objectChangeHandler);
+                        mx.data.unsubscribe(this._objectChangeHandler);
                     }
-
                     if (obj) {
-                        this.subscribe({
+                        this._objectChangeHandler = mx.data.subscribe({
                             guid: obj.getGuid(),
                             callback: lang.hitch(this, function() {
                                 this.executeCode();
@@ -95,8 +94,7 @@ require([
                 }
             }
 
-
-            callback();
+            mendix.lang.nullExec(callback);
         },
 
         _setupEvents: function() {
@@ -131,6 +129,7 @@ require([
                 domConstruct.place("<div class=\"alert alert-danger\">Error while evaluating javascript input: " + e + "</div>", this.domNode, "only");
             }
         }
-
     });
 });
+
+require(["HTMLSnippet/widget/HTMLSnippet"]);
