@@ -84,10 +84,10 @@ define([
 
                 if (this.refreshOnContextUpdate) {
                     if (this._objectChangeHandler !== null) {
-                        mx.data.unsubscribe(this._objectChangeHandler);
+                        this.unsubscribe(this._objectChangeHandler);
                     }
                     if (obj) {
-                        this._objectChangeHandler = mx.data.subscribe({
+                        this._objectChangeHandler = this.subscribe({
                             guid: obj.getGuid(),
                             callback: lang.hitch(this, function() {
                                 this.executeCode();
@@ -110,20 +110,7 @@ define([
         _executeMicroflow: function() {
             logger.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
-                mx.data.action({
-                    store: {
-                        caller: this.mxform
-                    },
-                    params: {
-                        actionname: this.onclickmf,
-                    },
-                    callback: function() {
-                        // ok
-                    },
-                    error: function() {
-                        // error
-                    }
-                });
+                mx.ui.action(this.onclickmf, {}, this);
             }
         },
 
