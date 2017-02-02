@@ -97,7 +97,7 @@ define([
                 }
             }
 
-            mendix.lang.nullExec(callback);
+            this._executeCallback(callback, "update");
         },
 
         _setupEvents: function() {
@@ -133,6 +133,13 @@ define([
                 eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
             } catch (e) {
                 domConstruct.place("<div class=\"alert alert-danger\">Error while evaluating javascript input: " + e + "</div>", this.domNode, "only");
+            }
+        },
+
+        _executeCallback: function (cb, from) {
+            logger.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
+            if (cb && typeof cb === "function") {
+                cb();
             }
         }
     });
