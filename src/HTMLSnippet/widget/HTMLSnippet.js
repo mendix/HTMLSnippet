@@ -17,6 +17,7 @@ define([
         _objectChangeHandler: null,
 
         postCreate: function() {
+            logger.debug(this.id + ".postCreate");
             this._setupEvents();
 
             if (!this.refreshOnContextChange) {
@@ -25,6 +26,7 @@ define([
         },
 
         executeCode: function() {
+            logger.debug(this.id + ".executeCode");
             var external = this.contentsPath !== "" ? true : false;
             switch (this.contenttype) {
                 case "html":
@@ -76,6 +78,7 @@ define([
         },
 
         update: function(obj, callback) {
+            logger.debug(this.id + ".update");
             if (this.refreshOnContextChange) {
                 this.executeCode();
 
@@ -98,19 +101,21 @@ define([
         },
 
         _setupEvents: function() {
+            logger.debug(this.id + "._setupEvents");
             if (this.onclickmf) {
                 this.connect(this.domNode, "click", this._executeMicroflow);
             }
         },
 
         _executeMicroflow: function() {
+            logger.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
                 mx.data.action({
                     store: {
                         caller: this.mxform
                     },
                     params: {
-                        actionname: this.onclickmf
+                        actionname: this.onclickmf,
                     },
                     callback: function() {
                         // ok
@@ -123,6 +128,7 @@ define([
         },
 
         evalJs: function() {
+            logger.debug(this.id + ".evalJS");
             try {
                 eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
             } catch (e) {
