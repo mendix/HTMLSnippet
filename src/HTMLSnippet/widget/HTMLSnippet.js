@@ -112,14 +112,12 @@ define([
         _executeMicroflow: function () {
             logger.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
-                var params = {
-                    applyto: "selection",
-                    actionname: this.onclickmf
-                };
-                if (this.contextObj != null) {
-                    params.guids = [this.contextObj.getGuid()]
+                var params = {};
+                if (this.contextObj !== null) {
+                    params.applyto = "selection";
+                    params.guids = [this.contextObj.getGuid()];
                 }
-                mx.data.action({
+                mx.ui.action(this.onclickmf, {
                     params: params,
                     callback: function (obj) { },
                     error: function (error) { }
