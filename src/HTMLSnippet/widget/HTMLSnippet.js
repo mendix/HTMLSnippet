@@ -9,14 +9,15 @@ define([
     "dojo/dom-construct",
     "dojo/_base/lang",
     "dijit/layout/LinkPane"
-], function(declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, LinkPane) {
+], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, LinkPane) {
     "use strict";
 
     return declare("HTMLSnippet.widget.HTMLSnippet", [_WidgetBase], {
 
         _objectChangeHandler: null,
+        contextObj: null,
 
-        postCreate: function() {
+        postCreate: function () {
             logger.debug(this.id + ".postCreate");
             this._setupEvents();
 
@@ -25,7 +26,7 @@ define([
             }
         },
 
-        executeCode: function() {
+        executeCode: function () {
             logger.debug(this.id + ".executeCode");
             var external = this.contentsPath !== "" ? true : false;
             switch (this.contenttype) {
@@ -35,7 +36,7 @@ define([
                             preload: true,
                             loadingMessage: "",
                             href: this.contentsPath,
-                            onDownloadError: function() {
+                            onDownloadError: function () {
                                 console.log("Error loading html path");
                             }
                         }).placeAt(this.domNode.id).startup();
@@ -77,8 +78,9 @@ define([
             }
         },
 
-        update: function(obj, callback) {
+        update: function (obj, callback) {
             logger.debug(this.id + ".update");
+            this.contextObj = obj;
             if (this.refreshOnContextChange) {
                 this.executeCode();
 
@@ -89,7 +91,7 @@ define([
                     if (obj) {
                         this._objectChangeHandler = this.subscribe({
                             guid: obj.getGuid(),
-                            callback: lang.hitch(this, function() {
+                            callback: lang.hitch(this, function () {
                                 this.executeCode();
                             })
                         });
@@ -100,21 +102,32 @@ define([
             this._executeCallback(callback, "update");
         },
 
-        _setupEvents: function() {
+        _setupEvents: function () {
             logger.debug(this.id + "._setupEvents");
             if (this.onclickmf) {
                 this.connect(this.domNode, "click", this._executeMicroflow);
             }
         },
 
-        _executeMicroflow: function() {
+        _executeMicroflow: function () {
             logger.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
-                mx.ui.action(this.onclickmf, {}, this);
+                var params = {
+                    applyto: "selection",
+                    actionname: this.onclickmf
+                };
+                if (this.contextObj != null) {
+                    params.guids = [this.contextObj.getGuid()]
+                }
+                mx.data.action({
+                    params: params,
+                    callback: function (obj) { },
+                    error: function (error) { }
+                }, this);
             }
         },
 
-        evalJs: function() {
+        evalJs: function () {
             logger.debug(this.id + ".evalJS");
             try {
                 eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
