@@ -8,12 +8,24 @@ define([
     "dojo/dom-attr",
     "dojo/dom-construct",
     "dojo/_base/lang",
+    "dojo/html",
     "dijit/layout/LinkPane"
-], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, LinkPane) {
+], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, html, LinkPane) {
     "use strict";
 
     return declare("HTMLSnippet.widget.HTMLSnippet", [_WidgetBase], {
 
+        // Set in Modeler
+        contenttype: "html",
+        contents: "",
+        contentsPath: "",
+        onclickmf: "",
+        documentation: "",
+        refreshOnContextChange: false,
+        refreshOnContextUpdate: false,
+        encloseHTMLWithDiv: true,
+
+        // Internal
         _objectChangeHandler: null,
         contextObj: null,
 
@@ -40,6 +52,8 @@ define([
                                 console.log("Error loading html path");
                             }
                         }).placeAt(this.domNode.id).startup();
+                    } else if (!this.encloseHTMLWithDiv) {
+                        html.set(this.domNode, this.contents);
                     } else {
                         domStyle.set(this.domNode, {
                             "height": "auto",

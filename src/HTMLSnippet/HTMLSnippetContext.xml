@@ -61,5 +61,12 @@
             <category>Behavior</category>
             <description>Refresh when the context updates (works only when context change is true)</description>
         </property>
+
+        <!-- Enclose HTML with DIV -->
+        <property key="encloseHTMLWithDiv" type="boolean" defaultValue="true">
+            <caption>Enclose HTML with DIV</caption>
+            <category>Behavior</category>
+            <description>When adding HTML, the widget will wrap it with a DIV. If this is set to false, it will just replace the content of the widget. (For compatibility purposes this is set true on default)</description>
+        </property>
     </properties>
 </widget>
