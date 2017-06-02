@@ -18,33 +18,64 @@ var gulp = require("gulp"),
     jsonTransform = require("gulp-json-transform"),
     intercept = require("gulp-intercept"),
     argv = require("yargs").argv,
-    widgetBuilderHelper = require("widgetbuilder-gulp-helper");
+    widgetBuilderHelper = require("widgetbuilder-gulp-helper"),
+    webpack = require("webpack"),
+    webpackConfig = require("./webpack.config.js");
+
+const webpackConfigRelease = {};
+const plugins = webpackConfig.plugins.slice(0);
+plugins.push(new webpack.optimize.UglifyJsPlugin());
+Object.assign(webpackConfigRelease, webpackConfig, {
+    devtool: false,
+    plugins: plugins
+});
 
 var pkg = require("./package.json"),
     paths = widgetBuilderHelper.generatePaths(pkg),
     xmlversion = widgetBuilderHelper.xmlversion;
 
-gulp.task("default", function() {
-    gulp.watch("./src/**/*", ["compress"]);
-    gulp.watch("./src/**/*.js", ["copy:js"]);
+gulp.task("default", ["clean", "webpack"], function() {
+    gulp.watch("./src/**/*", ["webpack"]);
+    gulp.watch("./dist/tmp/src/**/*.js", ["copy:js"]);
 });
 
 gulp.task("clean", function () {
     return del([
+        "./dist/tmp",
         paths.WIDGET_TEST_DEST,
         paths.WIDGET_DIST_DEST
     ], { force: true });
 });
 
-gulp.task("compress", ["clean"], function () {
-    return gulp.src("src/**/*")
+gulp.task("webpack", function(callback) {
+    webpack(webpackConfig, function(error, stats) {
+        if (error) {
+            throw new gutil.PluginError("webpack", err);
+        }
+        gulp.start("compress");
+        callback()
+    });
+});
+
+gulp.task("release", ["clean"], function(callback) {
+    webpack(webpackConfigRelease, function(error, stats) {
+        if (error) {
+            throw new gutil.PluginError("webpack", err);
+        }
+        gulp.start("compress");
+        callback();
+    });
+});
+
+gulp.task("compress", function () {
+    return gulp.src("dist/tmp/src/**/*")
         .pipe(zip(pkg.name + ".mpk"))
         .pipe(gulp.dest(paths.TEST_WIDGETS_FOLDER))
         .pipe(gulp.dest("dist"));
 });
 
 gulp.task("copy:js", function () {
-    return gulp.src(["./src/**/*.js"])
+    return gulp.src(["./dist/tmp/src/**/*.js"])
         .pipe(newer(paths.TEST_WIDGETS_DEPLOYMENT_FOLDER))
         .pipe(gulp.dest(paths.TEST_WIDGETS_DEPLOYMENT_FOLDER));
 });

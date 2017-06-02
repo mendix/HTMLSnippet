@@ -1,13 +1,18 @@
 {
   "name": "HTMLSnippet",
-  "version": "3.9.1",
+  "version": "4.0.0",
   "description": "",
   "license": "",
   "author": "",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "1.11.3"
+  },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.1",
     "del": "^2.2.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "gulp": "^3.9.1",
     "gulp-if": "^2.0.1",
     "gulp-intercept": "^0.1.0",
@@ -15,6 +20,12 @@
     "gulp-newer": "^1.3.0",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
+    "json-loader": "^0.5.4",
+    "sass-loader": "^6.0.3",
+    "source-map-loader": "^0.2.0",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.3.0",
+    "webpack-dev-server": "^2.4.2",
     "widgetbuilder-gulp-helper": "https://github.com/JelteMX/widgetbuilder-gulp-helper/archive/1.0.1.tar.gz",
     "yargs": "^6.0.0"
   },
