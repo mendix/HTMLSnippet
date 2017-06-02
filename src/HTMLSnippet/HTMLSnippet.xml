@@ -23,7 +23,7 @@
         <property key="contents" type="translatableString" multiline="true" required="false">
             <caption>Contents</caption>
             <category>Behavior</category>
-            <description>The HTML or Javascript to embed.</description>
+            <description>The HTML or Javascript to embed. When loaded with jQuery, it could be found in the variable jQuery</description>
         </property>
 
         <!-- html/js file path -->

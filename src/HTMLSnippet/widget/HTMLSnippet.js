@@ -81,9 +81,9 @@ define([
                         domConstruct.place(scriptNode, this.domNode, "only");
                     } else {
                         if (this.contenttype === "jsjQuery") {
-                            require([
-                                "HTMLSnippet/lib/jquery-1.11.3"
-                            ], lang.hitch(this, this.evalJs));
+                            require(["jquery"], lang.hitch(this, function(jQuery){
+                                this.evalJs(jQuery);
+                            }));
                         } else {
                             this.evalJs();
                         }
@@ -139,7 +139,8 @@ define([
             }
         },
 
-        evalJs: function () {
+        evalJs: function (jQuery) {
+            // pass jQuery to the context of eval
             logger.debug(this.id + ".evalJS");
             try {
                 eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
@@ -156,5 +157,3 @@ define([
         }
     });
 });
-
-require(["HTMLSnippet/widget/HTMLSnippet"]);
