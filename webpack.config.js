@@ -1,23 +1,32 @@
 const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const ZipPlugin = require("zip-webpack-plugin");
+
+const package = require("./package");
+const widgetName = package.name;
+const widgetNameContext = widgetName + "Context";
+const widgetVersion = package.version;
 
 module.exports = {
     entry: {
-        HTMLSnippet: "./src/HTMLSnippet/widget/HTMLSnippet.js",
-        HTMLSnippetContext: "./src/HTMLSnippet/widget/HTMLSnippetContext.js",
+        [widgetName]: [ "core-js/es6/promise", `./src/${widgetName}/widget/${widgetName}.js` ],
+        [widgetNameContext]: [ "core-js/es6/promise", `./src/${widgetName}/widget/${widgetNameContext}.js` ],
     },
     output: {
         path: path.resolve(__dirname, "dist/tmp/src"),
-        filename: "HTMLSnippet/widget/[name].js",
-        chunkFilename: "HTMLSnippet/widget/HTMLSnippet[id].js",
+        filename: `${widgetName}/widget/[name].js`,
+        chunkFilename: `${widgetName}/widget/${widgetName}[id].js`,
         libraryTarget: "amd",
         publicPath: "widgets/"
     },
     devtool: "source-map",
     externals: [ /^mxui\/|^mendix\/|^dojo\/|^dijit\// ],
     plugins: [
-        new CopyWebpackPlugin([ { from: "src/**/*.xml", to: "../" } ], { copyUnmodified: true }),
-        new webpack.LoaderOptionsPlugin({ debug: true })
+        new webpack.LoaderOptionsPlugin({ debug: true }),
+        new CleanWebpackPlugin([ "dist/tmp" ]),
+        new CopyWebpackPlugin([ {context: "src", from: "**/*.xml", debug: true} ], { copyUnmodified: true }),
+        new ZipPlugin({ path: `../../${widgetVersion}`, filename: widgetName, extension: "mpk" })
     ]
 };

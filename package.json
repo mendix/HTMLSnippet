@@ -6,9 +6,11 @@
   "author": "",
   "private": true,
   "dependencies": {
+    "core-js": "^2.4.1",
     "jquery": "1.11.3"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
     "del": "^2.2.2",
@@ -21,13 +23,15 @@
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.2.0",
     "json-loader": "^0.5.4",
+    "nodemon": "^1.11.0",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.17.0",
     "webpack": "^2.3.0",
     "webpack-dev-server": "^2.4.2",
     "widgetbuilder-gulp-helper": "https://github.com/JelteMX/widgetbuilder-gulp-helper/archive/1.0.1.tar.gz",
-    "yargs": "^6.0.0"
+    "yargs": "^6.0.0",
+    "zip-webpack-plugin": "^1.1.0"
   },
   "engines": {
     "node": ">=5"
@@ -38,7 +42,8 @@
     "testProjectFileName": "Test.mpr"
   },
   "scripts": {
-    "build": "node ./node_modules/gulp/bin/gulp build",
+    "start": "nodemon --watch webpack.config.js --exec \"webpack --watch\"",
+    "build": "webpack -p",
     "version": "node ./node_modules/gulp/bin/gulp version",
     "icon": "node ./node_modules/gulp/bin/gulp icon",
     "folders": "node ./node_modules/gulp/bin/gulp folders",
