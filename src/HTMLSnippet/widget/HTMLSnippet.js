@@ -82,7 +82,7 @@ define([
                     } else {
                         if (this.contenttype === "jsjQuery") {
                             require([
-                                "HTMLSnippet/lib/jquery-1.11.3"
+                                "HTMLSnippet/lib/jquery"
                             ], lang.hitch(this, this.evalJs));
                         } else {
                             this.evalJs();
