@@ -1,11 +1,7 @@
-define([
-    "dojo/_base/declare", "HTMLSnippet/widget/HTMLSnippet"
-], function (declare, HTMLSnippet) {
-    "use strict";
+import {
+    defineWidget,
+} from 'widget-base-helpers';
 
-    // Declare widget"s prototype.
-    return declare("HTMLSnippet.widget.HTMLSnippetContext", [HTMLSnippet]);
+import Core from 'Core';
 
-});
-
-require(["HTMLSnippet/widget/HTMLSnippetContext"]);
+export default defineWidget('HTMLSnippetContext', false, {}, Core);

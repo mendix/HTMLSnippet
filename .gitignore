@@ -11,9 +11,10 @@ test/.project
 *.lock
 .idea/
 
-dist/
-
 node_modules/
 *DS_Store*
 .vscode/
 *.bak
+
+build
+package-lock.json
