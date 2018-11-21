@@ -2,15 +2,13 @@
 define([
     "dojo/_base/declare",
     "mxui/widget/_WidgetBase",
-
-    "mxui/dom",
     "dojo/dom-style",
     "dojo/dom-attr",
     "dojo/dom-construct",
     "dojo/_base/lang",
     "dojo/html",
     "dijit/layout/LinkPane"
-], function (declare, _WidgetBase, dom, domStyle, domAttr, domConstruct, lang, html, LinkPane) {
+], function (declare, _WidgetBase, domStyle, domAttr, domConstruct, lang, html, LinkPane) {
     "use strict";
 
     return declare("HTMLSnippet.widget.HTMLSnippet", [_WidgetBase], {
