@@ -131,8 +131,12 @@ define([
                 }
                 mx.ui.action(this.onclickmf, {
                     params: params,
-                    callback: function (obj) {},
-                    error: function (error) {}
+                    callback: function (obj) {
+                        logger.debug(this.id + " (executed microflow successfully).");
+                    },
+                    error: function (error) {
+                        logger.error(this.id + error);
+                    }
                 }, this);
             }
         },
