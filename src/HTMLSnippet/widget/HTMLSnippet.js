@@ -82,7 +82,7 @@ define([
                     } else {
                         if (this.contenttype === "jsjQuery") {
                             require([
-                                "HTMLSnippet/lib/jquery"
+                                "HTMLSnippet/lib/jquery-3.3.1"
                             ], lang.hitch(this, this.evalJs));
                         } else {
                             this.evalJs();
@@ -133,8 +133,8 @@ define([
                 }
                 mx.ui.action(this.onclickmf, {
                     params: params,
-                    callback: function (obj) { },
-                    error: function (error) { }
+                    callback: function (obj) {},
+                    error: function (error) {}
                 }, this);
             }
         },
