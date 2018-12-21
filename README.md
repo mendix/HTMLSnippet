@@ -4,7 +4,7 @@ This widget is useful to add a piece of HTML or JavaScript to a form. For exampl
 
 ## Contributing
 
-For more information on contributing to this repository visit [Contributing to a GitHub repository](https://docs.mendix.com/howto7/collaboration-project-management/contribute-to-a-github-repository)!
+For more information on contributing to this repository visit [Contributing to a GitHub repository](https://docs.mendix.com/howto/collaboration-requirements-management/contribute-to-a-github-repository)!
 
 ## Typical usage scenario
 
