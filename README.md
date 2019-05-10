@@ -27,7 +27,7 @@ Select how the snippet should be rendered. The JavaScript with jQuery option wil
 * Contents : 
 The HTML or Javascript to embed.
 * External File :
-The path to the HTML or JavaScript file you want to add. The root is the theme folder. Will override the Contents section if used.
+The path to the HTML or JavaScript file you want to add. The root is the theme folder. Will override the Contents section if used. With the newly added "/p/" native deeplinks, you may want to start your file path with a "/" to prevent any 404s caused by this deeplink. 
 * On click microflow :
 The microflow which should be executed on click. This can be used to, for example, show a page when the snippet is being clicked.
 * Documentation : 
