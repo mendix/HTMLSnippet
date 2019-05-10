@@ -10,11 +10,12 @@ test/.project
 *.tmp
 *.lock
 .idea/
-settings/
+
 dist/
 
 node_modules/
-.editorconfig
 *DS_Store*
 .vscode/
 *.bak
+
+.prettierrc.json
