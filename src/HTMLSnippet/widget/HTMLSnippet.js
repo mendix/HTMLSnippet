@@ -1,4 +1,3 @@
-/*jslint -W061:false*/
 define([
     "dojo/_base/declare",
     "mxui/widget/_WidgetBase",
@@ -170,36 +169,32 @@ define([
 
         _evalJQueryCode: function () {
             logger.debug(this.id + "._evalJQueryCode");
-            /*** load jQuery ***/
-            require(["HTMLSnippet/lib/jquery-3.3.1"], lang.hitch(this, function (jquery_3_3_1) {
+            require(["jquery"], lang.hitch(this, function(jQuery){
                 try {
-
                     (function (snippetCode) {
-
                         /**
-                         *  user's are get used to or might expect to have jQuery available globaly
+                         *  user's are get used to or might expect to have jQuery available globally
                          *  and they will write their code according to that, and since we, in this widget, don't expose 
-                         *  jQuery globaly, we'll check user's code snippet if there is any attemption to access jQuery 
+                         *  jQuery globally, we'll check user's code snippet if there is any attempt to access jQuery 
                          *  from the global scope ( window ). 
                          */
                         var jqueryIdRegex1 = /window.\jQuery/g;
                         var jqueryIdRegex2 = /window.\$/g;
                         snippetCode = snippetCode.replace(jqueryIdRegex1, 'jQuery');
                         snippetCode = snippetCode.replace(jqueryIdRegex2, '$');
-
-                        snippetCode = "var jQuery, $; jQuery = $ = this.jquery;" + // make this jQuery version only accessible and availabe in the scope of this anonymous function
+                        // make this jQuery version only accessible and available in the scope of this anonymous function
+                        snippetCode = "var jQuery, $; jQuery = $ = this.jquery;" +
                             snippetCode +
                             "console.debug('your code snippet is evaluated and executed against JQuery version:'+ this.jquery.fn.jquery);";
                         eval(snippetCode);
                     }).call({
-                        jquery: jquery_3_3_1 // pass JQuery as the context of the immediate function which will wrap the code snippet
+                        jquery: jQuery // pass JQuery as the context of the immediate function which will wrap the code snippet
                     }, this.contents); // pass the code snippet as an arg
                 } catch (error) {
                     this._handleError(error);
                 }
             }));
         },
-
 
         _handleError: function (error) {
             logger.debug(this.id + "._handleError");
@@ -220,5 +215,3 @@ define([
         }
     });
 });
-
-require(["HTMLSnippet/widget/HTMLSnippet"]);
