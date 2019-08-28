@@ -1,5 +1,4 @@
 {
-    // Enforcing
     "curly"    : false,
     "forin"    : false,
     "latedef"  : "nofunc",
@@ -13,10 +12,8 @@
         "logger" : false
     },
 
-    // Relaxing
     "laxbreak" : true,
 
-    // Environments
     "browser"  : true,
     "devel"    : true,
     "dojo"     : true
