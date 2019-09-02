@@ -21,8 +21,8 @@ const widgetVersion = package.version;
         libraryTarget: "amd",
         publicPath: "widgets/"
     },
-    devtool: "source-map",
-    mode: "development",
+    devtool: false,
+    mode: "production",
     externals: [ /^mxui\/|^mendix\/|^dojo\/|^dijit\// ],
     plugins: [
         new webpack.LoaderOptionsPlugin({ debug: true }),
