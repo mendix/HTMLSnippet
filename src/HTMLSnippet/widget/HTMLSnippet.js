@@ -174,9 +174,9 @@ define([
                     (function (snippetCode) {
                         /**
                          *  user's are get used to or might expect to have jQuery available globally
-                         *  and they will write their code according to that, and since we, in this widget, don't expose 
-                         *  jQuery globally, we'll check user's code snippet if there is any attempt to access jQuery 
-                         *  from the global scope ( window ). 
+                         *  and they will write their code according to that, and since we, in this widget, don't expose
+                         *  jQuery globally, we'll check user's code snippet if there is any attempt to access jQuery
+                         *  from the global scope ( window ).
                          */
                         var jqueryIdRegex1 = /window.\jQuery/g;
                         var jqueryIdRegex2 = /window.\$/g;
@@ -188,7 +188,8 @@ define([
                             "console.debug('your code snippet is evaluated and executed against JQuery version:'+ this.jquery.fn.jquery);";
                         eval(snippetCode);
                     }).call({
-                        jquery: jQuery // pass JQuery as the context of the immediate function which will wrap the code snippet
+                        jquery: jQuery, // pass JQuery as the context of the immediate function which will wrap the code snippet
+                        widget: this    // pass the HTMLSnippet widget context itself, so the code could use listen/addOnDestroy
                     }, this.contents); // pass the code snippet as an arg
                 } catch (error) {
                     this._handleError(error);
