@@ -19,7 +19,7 @@ const widgetVersion = package.version;
         filename: `${widgetName}/widget/[name].js`,
         chunkFilename: `${widgetName}/widget/${widgetName}[id].js`,
         libraryTarget: "amd",
-        publicPath: "widgets/"
+        publicPath: "/widgets/"
     },
     devtool: false,
     mode: "production",
