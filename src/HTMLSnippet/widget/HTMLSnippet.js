@@ -35,7 +35,7 @@ define([
         contextObj: null,
 
         postCreate: function () {
-            logger.debug(this.id + ".postCreate");
+            mx.logger.debug(this.id + ".postCreate");
             this._setupEvents();
 
             if (!this.refreshOnContextChange) {
@@ -44,7 +44,7 @@ define([
         },
 
         executeCode: function () {
-            logger.debug(this.id + ".executeCode");
+            mx.logger.debug(this.id + ".executeCode");
             var external = this.contentsPath !== "" ? true : false;
             switch (this.contenttype) {
                 case "html":
@@ -99,7 +99,7 @@ define([
         },
 
         update: function (obj, callback) {
-            logger.debug(this.id + ".update");
+            mx.logger.debug(this.id + ".update");
             this.contextObj = obj;
             if (this.refreshOnContextChange) {
                 this.executeCode();
@@ -123,7 +123,7 @@ define([
         },
 
         _setupEvents: function () {
-            logger.debug(this.id + "._setupEvents");
+            mx.logger.debug(this.id + "._setupEvents");
             if (this.onclickmf) {
                 this.connect(
                     this.domNode,
@@ -134,7 +134,7 @@ define([
         },
 
         _executeMicroflow: function () {
-            logger.debug(this.id + "._executeMicroflow");
+            mx.logger.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
                 var params = {};
                 if (this.contextObj !== null) {
@@ -145,12 +145,12 @@ define([
                     this.onclickmf, {
                         params: params,
                         callback: function (obj) {
-                            logger.debug(
+                            mx.logger.debug(
                                 this.id + " (executed microflow successfully)."
                             );
                         },
                         error: function (error) {
-                            logger.error(this.id + error);
+                            mx.logger.error(this.id + error);
                         }
                     },
                     this
@@ -159,7 +159,7 @@ define([
         },
 
         evalJs: function () {
-            logger.debug(this.id + ".evalJS");
+            mx.logger.debug(this.id + ".evalJS");
             try {
                 eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
             } catch (error) {
@@ -168,7 +168,7 @@ define([
         },
 
         _evalJQueryCode: function () {
-            logger.debug(this.id + "._evalJQueryCode");
+            mx.logger.debug(this.id + "._evalJQueryCode");
             require(["jquery"], lang.hitch(this, function(jQuery){
                 try {
                     (function (snippetCode) {
@@ -198,7 +198,7 @@ define([
         },
 
         _handleError: function (error) {
-            logger.debug(this.id + "._handleError");
+            mx.logger.debug(this.id + "._handleError");
             domConstruct.place(
                 '<div class="alert alert-danger">Error while evaluating javascript input: ' +
                 error +
@@ -209,7 +209,7 @@ define([
         },
 
         _executeCallback: function (cb, from) {
-            logger.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
+            mx.logger.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
             if (cb && typeof cb === "function") {
                 cb();
             }
