@@ -136,25 +136,24 @@ define([
         _executeMicroflow: function () {
             mx.logger.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
-                var params = {};
+                var params = {
+                    actionname: this.onclickmf
+                };
                 if (this.contextObj !== null) {
                     params.applyto = "selection";
                     params.guids = [this.contextObj.getGuid()];
                 }
-                mx.ui.action(
-                    this.onclickmf, {
-                        params: params,
-                        callback: function (obj) {
-                            mx.logger.debug(
-                                this.id + " (executed microflow successfully)."
-                            );
-                        },
-                        error: function (error) {
-                            mx.logger.error(this.id + error);
-                        }
+                mx.data.action({
+                    params: params,
+                    callback: function (obj) {
+                        mx.logger.debug(
+                            this.id + " (executed microflow successfully)."
+                        );
                     },
-                    this
-                );
+                    error: function (error) {
+                        mx.logger.error(this.id + error);
+                    }
+                });
             }
         },
 
