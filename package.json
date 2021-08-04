@@ -1,13 +1,13 @@
 {
     "name": "HTMLSnippet",
-    "version": "3.9.6",
+    "version": "3.9.7",
     "description": "",
     "license": "",
     "author": "",
     "private": true,
     "dependencies": {
         "core-js": "^3.2.1",
-        "jquery": "^3.5.0"
+        "jquery": "~3.5.1"
     },
     "devDependencies": {
         "clean-webpack-plugin": "^3.0.0",
