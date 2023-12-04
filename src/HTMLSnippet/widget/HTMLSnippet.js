@@ -35,7 +35,7 @@ define([
         contextObj: null,
 
         postCreate: function () {
-            mx.logger.debug(this.id + ".postCreate");
+            console.debug(this.id + ".postCreate");
             this._setupEvents();
 
             if (!this.refreshOnContextChange) {
@@ -44,7 +44,7 @@ define([
         },
 
         executeCode: function () {
-            mx.logger.debug(this.id + ".executeCode");
+            console.debug(this.id + ".executeCode");
             var external = this.contentsPath !== "" ? true : false;
             switch (this.contenttype) {
                 case "html":
@@ -99,7 +99,7 @@ define([
         },
 
         update: function (obj, callback) {
-            mx.logger.debug(this.id + ".update");
+            console.debug(this.id + ".update");
             this.contextObj = obj;
             if (this.refreshOnContextChange) {
                 this.executeCode();
@@ -123,7 +123,7 @@ define([
         },
 
         _setupEvents: function () {
-            mx.logger.debug(this.id + "._setupEvents");
+            console.debug(this.id + "._setupEvents");
             if (this.onclickmf) {
                 this.connect(
                     this.domNode,
@@ -134,7 +134,7 @@ define([
         },
 
         _executeMicroflow: function () {
-            mx.logger.debug(this.id + "._executeMicroflow");
+            console.debug(this.id + "._executeMicroflow");
             if (this.onclickmf) {
                 var params = {
                     actionname: this.onclickmf
@@ -146,19 +146,19 @@ define([
                 mx.data.action({
                     params: params,
                     callback: function (obj) {
-                        mx.logger.debug(
+                        console.debug(
                             this.id + " (executed microflow successfully)."
                         );
                     },
                     error: function (error) {
-                        mx.logger.error(this.id + error);
+                        console.error(this.id + error);
                     }
                 });
             }
         },
 
         evalJs: function () {
-            mx.logger.debug(this.id + ".evalJS");
+            console.debug(this.id + ".evalJS");
             try {
                 eval(this.contents + "\r\n//# sourceURL=" + this.id + ".js");
             } catch (error) {
@@ -167,7 +167,7 @@ define([
         },
 
         _evalJQueryCode: function () {
-            mx.logger.debug(this.id + "._evalJQueryCode");
+            console.debug(this.id + "._evalJQueryCode");
             require(["jquery"], lang.hitch(this, function(jQuery){
                 try {
                     (function (snippetCode) {
@@ -197,7 +197,7 @@ define([
         },
 
         _handleError: function (error) {
-            mx.logger.debug(this.id + "._handleError");
+            console.debug(this.id + "._handleError");
             domConstruct.place(
                 '<div class="alert alert-danger">Error while evaluating javascript input: ' +
                 error +
@@ -208,7 +208,7 @@ define([
         },
 
         _executeCallback: function (cb, from) {
-            mx.logger.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
+            console.debug(this.id + "._executeCallback" + (from ? " from " + from : ""));
             if (cb && typeof cb === "function") {
                 cb();
             }
