@@ -1,12 +1,12 @@
 {
     "name": "HTMLSnippet",
-    "version": "3.9.8",
+    "version": "3.9.9",
     "description": "",
     "license": "",
     "author": "",
     "private": true,
     "dependencies": {
-        "core-js": "^3.2.1",
+        "core-js": "^3.38.1",
         "jquery": "~3.5.1"
     },
     "devDependencies": {
