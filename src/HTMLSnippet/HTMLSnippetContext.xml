@@ -20,7 +20,7 @@
         </property>
 
         <!-- html/js string -->
-        <property key="contents" type="translatableString" multiline="true" required="false">
+        <property key="contents" type="string" multiline="true" required="false">
             <caption>Contents</caption>
             <category>Behavior</category>
             <description>The HTML or Javascript to embed.</description>
