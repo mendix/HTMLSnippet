@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="HTMLSnippet.widget.HTMLSnippet" needsEntityContext="false" xmlns="http://www.mendix.com/widget/1.0/">
+<widget id="HTMLSnippet.widget.HTMLSnippet" needsEntityContext="false" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
     <name>HTMLSnippet</name>
     <description>The HTMLSnippet widget can be used to insert a custom piece of HTML or JavaScript in the client</description>
 
