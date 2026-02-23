@@ -1,6 +1,6 @@
 {
     "name": "HTMLSnippet",
-    "version": "3.10.0",
+    "version": "4.0.0",
     "description": "",
     "license": "",
     "author": "",
@@ -10,13 +10,13 @@
         "jquery": "~3.5.1"
     },
     "devDependencies": {
-        "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^5.0.4",
-        "webpack": "^4.39.3",
-        "webpack-cli": "^3.3.7",
-        "webpack-dev-server": "^3.8.0",
-        "webpack-merge": "^4.2.2",
-        "zip-webpack-plugin": "^3.0.0"
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^13.0.1",
+        "webpack": "5.104.1",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.2.3",
+        "webpack-merge": "^5.10.0",
+        "zip-webpack-plugin": "^4.0.3"
     },
     "engines": {
         "node": ">=5"
@@ -28,6 +28,6 @@
     },
     "scripts": {
         "dev": "webpack --config=webpack.config.dev.js",
-        "build": "webpack"
+        "build": "node ./generate-dependencies.js && webpack"
     }
 }
