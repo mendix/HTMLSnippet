@@ -9,7 +9,7 @@ const widgetName = package.name;
 const widgetNameContext = widgetName + "Context";
 const widgetVersion = package.version;
 
- module.exports = {
+module.exports = {
     entry: {
         [widgetName]: [ "core-js/es/promise", `./src/${widgetName}/widget/${widgetName}.js` ],
         [widgetNameContext]: [ "core-js/es/promise", `./src/${widgetName}/widget/${widgetNameContext}.js` ],
@@ -17,7 +17,7 @@ const widgetVersion = package.version;
     output: {
         path: path.resolve(__dirname, "dist/tmp/src"),
         filename: `${widgetName}/widget/[name].js`,
-        chunkFilename: `${widgetName}/widget/${widgetName}[id].js`,
+        chunkFormat: false,
         libraryTarget: "amd",
         publicPath: "/widgets/"
     },
@@ -27,7 +27,25 @@ const widgetVersion = package.version;
     plugins: [
         new webpack.LoaderOptionsPlugin({ debug: true }),
         new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: "dist/tmp" }),
-        new CopyWebpackPlugin([ {context: "src", from: "**/*.xml", debug: true} ], { copyUnmodified: true }),
+        new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: "**/*.xml",
+                        context: "src"
+                    },
+                    {
+                        from: `dependencies.json`
+                    },
+                    {
+                        from: `dependencies.txt`
+                    },
+                    {
+                        from: `LICENSE`,
+                        to: "./License.txt",
+                    },
+                ]
+            }
+        ),
         new ZipPlugin({ path: `../../${widgetVersion}`, filename: widgetName, extension: "mpk" })
     ]
 };
